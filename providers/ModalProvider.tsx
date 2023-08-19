@@ -2,6 +2,7 @@
 
 import AuthModal from "@/components/AuthModal";
 import Modal from "@/components/Modal";
+import UploadModal from "@/components/UploadModal";
 import React, { useEffect, useState } from "react";
 
 // This component serves as a Modal Provider, responsible for managing modal-related functionality.
@@ -24,6 +25,7 @@ const ModalProvider = () => {
     return (
         <div>
             <AuthModal />
+            <UploadModal />
         </div>
     );
 };
