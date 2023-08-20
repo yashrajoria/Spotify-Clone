@@ -1,8 +1,11 @@
+"use client"
 // Import necessary types and functions from different modules
 import { Subscription, UserDetails } from "@/types";
 import { User } from "@supabase/auth-helpers-nextjs";
 import { useSessionContext, useUser as useSupaUser } from "@supabase/auth-helpers-react";
 import { createContext, useContext, useEffect, useState } from "react";
+import React from "react";
+
 
 // Define the structure of the context data
 type UserContextType = {
@@ -12,7 +15,6 @@ type UserContextType = {
     isLoading: boolean;
     subscription: Subscription | null;
 }
-
 // Create a context to hold the user-related data
 export const UserContext = createContext<UserContextType | undefined>(
     undefined
