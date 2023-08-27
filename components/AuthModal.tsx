@@ -13,10 +13,9 @@ import useAuthModal from "@/hooks/useAuthModal";
 
 const AuthModal = () => {
     const supabaseClient = useSupabaseClient();
-    // console.log(supabaseClient)
     const router = useRouter();
     const { session } = useSessionContext();
-    // console.log(session);
+
     const { onClose, isOpen } = useAuthModal();
 
     useEffect(() => {

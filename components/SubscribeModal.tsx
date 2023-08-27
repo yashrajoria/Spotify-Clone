@@ -26,7 +26,7 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({ products }) => {
     const subscribeModal = useSubscribeModal();
 
     const { user, isLoading, subscription } = useUser();
-    if (subscription == null) console.log("Subscription not fetced")
+
     const [priceIdLoading, setPriceIdLoading] = useState<string>();
     const onChange = (open: boolean) => {
         if (!open) {
@@ -40,7 +40,6 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({ products }) => {
             return toast.error("Must Be logged in");
         }
         if (subscription) {
-            console.log(subscription)
             setPriceIdLoading(undefined);
             return toast("Already Subscribed");
         }
