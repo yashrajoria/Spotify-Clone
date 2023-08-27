@@ -8,7 +8,6 @@ const useOnPlay = (songs: Song[]) => {
   const player = usePlayer();
   const authModal = useAuthModal();
   const { user } = useUser();
-  console.log(user);
 
   const onPlay = (id: string) => {
     if (!user) {
