@@ -11,7 +11,7 @@ import toast from 'react-hot-toast';
 const AccountContent = () => {
     const router = useRouter()
     const subscribeModal = useSubscribeModal();
-    const { isLoading, subscription, user } = useUser();
+    const { isLoading, subscription, user, userDetails } = useUser();
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -45,6 +45,7 @@ const AccountContent = () => {
 
             {subscription && (
                 <div className="flex flex-col gap-y-4">
+                    <h1>Hello <b>{user?.email}</b></h1>
                     <p>You are currently on the <b>{subscription?.prices?.products?.name}</b> plan</p>
                     <Button className='w-[300px]' disabled={loading || isLoading}
                         onClick={redirectToCustomerPortal}>Open Customer Portal</Button>
