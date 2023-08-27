@@ -77,7 +77,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                     {user ? ( // If user is logged in
                         <div className="flex gap-x-4 items-center">
                             <Button onClick={handleLogout} className="bg-white px-6 py-2">
-                                Log Out
+                                Logout
                             </Button>
                             <Button
                                 onClick={() => router.push("/account")} // Navigate to account page
@@ -91,18 +91,22 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                         <>
                             <div>
                                 <Button
-                                    className="bg-transparent text-neutral-300 font-medium"
-                                    onClick={authModal.onOpen} // Open sign up modal
+                                    onClick={authModal.onOpen}
+                                    className="
+                    bg-transparent 
+                    text-neutral-300 
+                    font-medium
+                  "
                                 >
-                                    Sign Up
+                                    Sign up
                                 </Button>
                             </div>
                             <div>
                                 <Button
+                                    onClick={authModal.onOpen}
                                     className="bg-white px-6 py-2"
-                                    onClick={authModal.onOpen} // Open login modal
                                 >
-                                    Login
+                                    Log in
                                 </Button>
                             </div>
                         </>
@@ -112,6 +116,6 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             {children}
         </div>
     );
-};
+}
 
 export default Header;

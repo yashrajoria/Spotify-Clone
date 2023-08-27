@@ -26,7 +26,7 @@ const AuthModal = () => {
     }, [session, router, onClose]);
 
     const onChange = (open: boolean) => {
-        if (!isOpen) {
+        if (!open) {
             onClose();
         }
     };
@@ -36,9 +36,7 @@ const AuthModal = () => {
             title="Welcome Back"
             description="Login to your account"
             isOpen={isOpen}
-            onChange={() => {
-                onChange;
-            }}
+            onChange={onChange}
         >
             <Auth
                 theme="dark"
