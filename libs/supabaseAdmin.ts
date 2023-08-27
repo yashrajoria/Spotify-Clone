@@ -6,11 +6,10 @@ import { Price, Products } from "@/types";
 
 import { stripe } from "./stripe";
 import { toDateTime } from "./helpers";
-import { error } from "console";
 
 export const supabaseAdmin = createClient<Database>(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || " ",
-  process.env.NEXT_PUBLIC_SUPABASE_ROLE_KEY || " "
+  process.env.NEXT_PUBLIC_SUPABASE_URL || "",
+  process.env.NEXT_PUBLIC_SUPABASE_ROLE_KEY || ""
 );
 
 const upsertProductRecord = async (product: Stripe.Product) => {
@@ -95,6 +94,7 @@ const copyBillingDetailsToCustomer = async (
   uuid: string,
   payment_method: Stripe.PaymentMethod
 ) => {
+  //Todo: check this assertion
   const customer = payment_method.customer as string;
   const { name, phone, address } = payment_method.billing_details;
   if (!name || !phone || !address) {
@@ -118,23 +118,21 @@ const copyBillingDetailsToCustomer = async (
 const manageSubscriptionStatusChange = async (
   subscriptionId: string,
   customerId: string,
-  createAction: false
+  createAction = false
 ) => {
+  // Get customer's UUID from mapping table.
   const { data: customerData, error: noCustomerError } = await supabaseAdmin
     .from("customers")
     .select("id")
     .eq("stripe_customer_id", customerId)
     .single();
-
   if (noCustomerError) throw noCustomerError;
 
   const { id: uuid } = customerData!;
   const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
     expand: ["default_payment_method"],
   });
-
-  //Upsert the latest status of the subscrption object
-
+  // Upsert the latest status of the subscription object.
   const subscriptionData: Database["public"]["Tables"]["subscriptions"]["Insert"] =
     {
       id: subscription.id,
@@ -170,6 +168,7 @@ const manageSubscriptionStatusChange = async (
         ? toDateTime(subscription.trial_end).toISOString()
         : null,
     };
+
   const { error } = await supabaseAdmin
     .from("subscriptions")
     .upsert([subscriptionData]);
